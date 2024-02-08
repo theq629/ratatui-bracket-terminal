@@ -29,9 +29,8 @@ impl State {
 impl GameState for State {
     fn tick(&mut self, ctx: &mut BTerm) {
         update_data(&mut self.data, &mut self.rng);
-        let mut rat_term =
-            Terminal::new(self.backend_man.get(ctx)).expect("failed to make ratatui terminal");
-        rat_term
+        Terminal::new(self.backend_man.get(ctx))
+            .expect("failed to make ratatui terminal")
             .draw(|f| render_ui(f, &mut self.data))
             .expect("failed to render ui");
     }

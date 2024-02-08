@@ -2,6 +2,15 @@
 //!
 //! This may be convenient if drawing to Bracket Terminal only through Ratatui. Otherwise, the
 //! [draw batch interface][crate::draw_batch] is probably more convenient.
+//!
+//! ```rust,no_run
+//! fn tick(&mut self, ctx: &mut BTerm) {
+//!     Terminal::new(self.backend_man.get(ctx))
+//!         .expect("failed to make ratatui terminal")
+//!         .draw(|f| ...)
+//!         .expect("failed to render ui");
+//! }
+//! ```
 
 use crate::colours::ColourConverter;
 use bracket_terminal::prelude::BTerm;

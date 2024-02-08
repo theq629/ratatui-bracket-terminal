@@ -1,4 +1,19 @@
 //! Backends which draw to a Bracket [DrawBatch].
+//!
+//! ```rust,no_run
+//! fn tick(&mut self, ctx: &mut BTerm) {
+//!     self.term.backend_mut().update(ctx);
+//!     self.term
+//!         .draw(|f| ...)
+//!         .expect("failed to render ui");
+//!     self.term
+//!         .backend_mut()
+//!         .batch_mut()
+//!         .submit(0)
+//!         .expect("failed to submit batch");
+//!     render_draw_buffer(ctx).expect("failed to render draw buffer");
+//! }
+//! ```
 
 use crate::colours::ColourConverter;
 use bracket_terminal::prelude::{BTerm, ColorPair, DrawBatch, Point};
