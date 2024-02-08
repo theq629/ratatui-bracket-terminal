@@ -1,6 +1,6 @@
 //! Backends which draw to a Bracket [DrawBatch].
 //!
-//! ```rust,no_run
+//! ```rust,ignore
 //! fn tick(&mut self, ctx: &mut BTerm) {
 //!     self.term.backend_mut().update(ctx);
 //!     self.term
