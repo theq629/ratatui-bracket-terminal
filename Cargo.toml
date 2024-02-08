@@ -5,7 +5,7 @@ edition = "2021"
 description = "Ratatui backends for Bracket Terminal"
 license-file = "LICENCE.txt"
 readme = "README.md"
-keywords = ["tui", "terminal", "ascii", "cp437", "gamedev", "roguelike"]
+keywords = ["tui", "terminal", "ascii", "cp437", "gamedev"]
 
 [dependencies]
 bracket-terminal = { version = "0.8" }
