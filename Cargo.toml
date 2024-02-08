@@ -10,7 +10,7 @@ keywords = ["tui", "terminal", "ascii", "cp437", "gamedev"]
 [dependencies]
 bracket-terminal = { version = "0.8" }
 ratatui = "0.26"
-object-pool = "*" # used by bracket-terminal
+object-pool = "0.5" # used by bracket-terminal
 
 [dev-dependencies]
 rand = "0.8"
