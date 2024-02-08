@@ -6,6 +6,7 @@ description = "Ratatui backends for Bracket Terminal"
 license-file = "LICENCE.txt"
 readme = "README.md"
 keywords = ["tui", "terminal", "ascii", "cp437", "gamedev"]
+repository = "https://github.com/theq629/ratatui-bracket-terminal"
 
 [dependencies]
 bracket-terminal = { version = "0.8" }
