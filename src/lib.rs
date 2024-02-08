@@ -1,14 +1,10 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+//! [Ratatui][ratatui] backends for [Bracket Terminal][bracket_terminal].
+//!
+//! This crate does not currently provide any special support for rendering the Ratatui cursor; if
+//! you want to show the cursor then the calling code needs to draw it.
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+pub mod bterm;
+mod colours;
+pub mod draw_batch;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
-}
+pub use colours::{BasicColourConverter, ColourConverter};

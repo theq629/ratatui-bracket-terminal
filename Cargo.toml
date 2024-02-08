@@ -2,5 +2,15 @@
 name = "ratatui-bracket-terminal"
 version = "0.1.0"
 edition = "2021"
+description = "Ratatui backends for Bracket Terminal"
+license-file = "LICENCE.txt"
+readme = "README.md"
+keywords = ["tui", "terminal", "ascii", "cp437", "gamedev", "roguelike"]
 
 [dependencies]
+bracket-terminal = { version = "0.8" }
+ratatui = "0.26"
+object-pool = "*" # used by bracket-terminal
+
+[dev-dependencies]
+rand = "0.8"
