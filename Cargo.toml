@@ -10,7 +10,7 @@ repository = "https://github.com/theq629/ratatui-bracket-terminal"
 
 [dependencies]
 bracket-terminal = { version = "0.8" }
-ratatui = "0.26"
+ratatui = { version="0.26", default-features=false }
 object-pool = "0.5" # used by bracket-terminal
 
 [dev-dependencies]
