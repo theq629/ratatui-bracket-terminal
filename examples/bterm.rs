@@ -2,8 +2,8 @@
 mod ui;
 
 use bracket_terminal::prelude::*;
+use rand::rng;
 use rand::rngs::ThreadRng;
-use rand::thread_rng;
 use ratatui::Terminal;
 use ratatui_bracket_terminal::bterm::BTermBackendManager;
 use ratatui_bracket_terminal::BasicColourConverter;
@@ -19,7 +19,7 @@ struct State {
 impl State {
     fn new() -> Self {
         Self {
-            rng: thread_rng(),
+            rng: rng(),
             backend_man: BTermBackendManager::new(Default::default()),
             data: VecDeque::new(),
         }

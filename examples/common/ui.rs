@@ -5,9 +5,9 @@ use ratatui::widgets::{Block, Paragraph, Sparkline};
 use ratatui::{symbols, Frame};
 use std::collections::VecDeque;
 
-const FULL: &'static str = "Û";
-const HALF: &'static str = "Ü";
-const EMPTY: &'static str = " ";
+const FULL: &str = "Û";
+const HALF: &str = "Ü";
+const EMPTY: &str = " ";
 const BAR: symbols::bar::Set = symbols::bar::Set {
     full: FULL,
     seven_eighths: FULL,
@@ -21,7 +21,7 @@ const BAR: symbols::bar::Set = symbols::bar::Set {
 };
 
 pub fn update_data(data: &mut VecDeque<u64>, rng: &mut impl Rng) {
-    data.push_back(rng.gen_range(0..100));
+    data.push_back(rng.random_range(0..100));
     while data.len() > 50 {
         data.pop_front();
     }
@@ -40,7 +40,7 @@ pub fn render_ui(frame: &mut Frame, data: &mut VecDeque<u64>) {
             ]
             .as_ref(),
         )
-        .split(frame.size());
+        .split(frame.area());
 
     let greeting = Paragraph::new("Hello world");
     frame.render_widget(greeting, chunks[0]);
@@ -49,7 +49,7 @@ pub fn render_ui(frame: &mut Frame, data: &mut VecDeque<u64>) {
     let sparkline = Sparkline::default()
         .block(Block::default().title("Data"))
         .style(Style::default().fg(Color::Yellow))
-        .data(data)
+        .data(&*data)
         .bar_set(BAR);
     frame.render_widget(sparkline, chunks[1]);
 }
