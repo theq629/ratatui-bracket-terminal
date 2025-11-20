@@ -2,8 +2,8 @@
 mod ui;
 
 use bracket_terminal::prelude::*;
-use rand::rng;
-use rand::rngs::ThreadRng;
+use rand::rngs::SmallRng;
+use rand::SeedableRng;
 use ratatui::Terminal;
 use ratatui_bracket_terminal::draw_batch::DrawBatchBackend;
 use ratatui_bracket_terminal::BasicColourConverter;
@@ -11,7 +11,7 @@ use std::collections::VecDeque;
 use ui::{render_ui, update_data};
 
 struct State {
-    rng: ThreadRng,
+    rng: SmallRng,
     term: Terminal<DrawBatchBackend<BasicColourConverter>>,
     data: VecDeque<u64>,
 }
@@ -19,7 +19,7 @@ struct State {
 impl State {
     fn new() -> Self {
         Self {
-            rng: rng(),
+            rng: SmallRng::seed_from_u64(0),
             term: Terminal::new(DrawBatchBackend::new(Default::default()))
                 .expect("failed to make ratatui terminal"),
             data: VecDeque::new(),
