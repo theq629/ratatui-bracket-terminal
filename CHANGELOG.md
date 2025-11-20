@@ -7,6 +7,8 @@ this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased] - ReleaseDate
 
+## [0.2.0] - 2025-11-20
+
 - Update dependencies, with Ratatui now at 0.29 (no changes to Bracketlib).
 - Minor code cleanup.
 
