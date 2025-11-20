@@ -20,7 +20,7 @@ use bracket_terminal::prelude::{BTerm, ColorPair, DrawBatch, Point};
 use object_pool::Reusable;
 use ratatui::backend::{Backend, WindowSize};
 use ratatui::buffer::Cell;
-use ratatui::layout::{Rect, Size};
+use ratatui::layout::{Position, Size};
 use std::io;
 
 /// Ratatui [Backend] which draws to a Bracket [DrawBatch] which it creates.
@@ -31,9 +31,9 @@ use std::io;
 ///   for each tick.
 pub struct DrawBatchBackend<C> {
     colours: C,
-    cursor_pos: (u16, u16),
+    cursor_pos: Position,
     batch: Reusable<'static, DrawBatch>,
-    size: Rect,
+    size: Size,
     window_size: WindowSize,
 }
 
@@ -41,9 +41,9 @@ impl<C> DrawBatchBackend<C> {
     pub fn new(colours: C) -> Self {
         Self {
             colours,
-            cursor_pos: (0, 0),
+            cursor_pos: Position::new(0, 0),
             batch: DrawBatch::new(),
-            size: Rect::new(0, 0, 0, 0),
+            size: Size::new(0, 0),
             window_size: WindowSize {
                 columns_rows: Size {
                     width: 0,
@@ -69,7 +69,7 @@ impl<C> DrawBatchBackend<C> {
     /// tick before any use of the backend, to ensure consistent state.
     pub fn update(&mut self, bterm: &BTerm) {
         let (width, height) = bterm.get_char_size();
-        self.size = Rect::new(0, 0, width.try_into().unwrap(), height.try_into().unwrap());
+        self.size = Size::new(width.try_into().unwrap(), height.try_into().unwrap());
         self.window_size = WindowSize {
             columns_rows: Size {
                 width: width as u16,
@@ -114,12 +114,12 @@ where
         Ok(())
     }
 
-    fn get_cursor(&mut self) -> io::Result<(u16, u16)> {
+    fn get_cursor_position(&mut self) -> io::Result<Position> {
         Ok(self.cursor_pos)
     }
 
-    fn set_cursor(&mut self, x: u16, y: u16) -> io::Result<()> {
-        self.cursor_pos = (x, y);
+    fn set_cursor_position<P: Into<Position>>(&mut self, pos: P) -> io::Result<()> {
+        self.cursor_pos = pos.into();
         Ok(())
     }
 
@@ -128,7 +128,7 @@ where
         Ok(())
     }
 
-    fn size(&self) -> io::Result<Rect> {
+    fn size(&self) -> io::Result<Size> {
         Ok(self.size)
     }
 

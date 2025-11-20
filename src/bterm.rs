@@ -16,7 +16,7 @@ use crate::colours::ColourConverter;
 use bracket_terminal::prelude::BTerm;
 use ratatui::backend::{Backend, WindowSize};
 use ratatui::buffer::Cell;
-use ratatui::layout::{Rect, Size};
+use ratatui::layout::{Position, Size};
 use std::io;
 
 /// Manager that can create Ratatui [Backend]s for a Bracket [`BTerm`].
@@ -28,14 +28,14 @@ use std::io;
 ///   draw.
 pub struct BTermBackendManager<C> {
     colours: C,
-    cursor_pos: (u16, u16),
+    cursor_pos: Position,
 }
 
 impl<C> BTermBackendManager<C> {
     pub fn new(colours: C) -> Self {
         Self {
             colours,
-            cursor_pos: (0, 0),
+            cursor_pos: Position::new(0, 0),
         }
     }
 
@@ -56,7 +56,7 @@ impl<C> BTermBackendManager<C> {
 pub struct BTermBackend<'a, 'b, C> {
     bterm: &'b mut BTerm,
     colours: &'a C,
-    cursor_pos: &'a mut (u16, u16),
+    cursor_pos: &'a mut Position,
 }
 
 impl<C> Backend for BTermBackend<'_, '_, C>
@@ -89,12 +89,12 @@ where
         Ok(())
     }
 
-    fn get_cursor(&mut self) -> io::Result<(u16, u16)> {
+    fn get_cursor_position(&mut self) -> io::Result<Position> {
         Ok(*self.cursor_pos)
     }
 
-    fn set_cursor(&mut self, x: u16, y: u16) -> io::Result<()> {
-        *self.cursor_pos = (x, y);
+    fn set_cursor_position<P: Into<Position>>(&mut self, pos: P) -> io::Result<()> {
+        *self.cursor_pos = pos.into();
         Ok(())
     }
 
@@ -103,9 +103,9 @@ where
         Ok(())
     }
 
-    fn size(&self) -> io::Result<Rect> {
+    fn size(&self) -> io::Result<Size> {
         let (width, height) = self.bterm.get_char_size();
-        Ok(Rect::new(0, 0, width as u16, height as u16))
+        Ok(Size::new(width as u16, height as u16))
     }
 
     fn window_size(&mut self) -> io::Result<WindowSize> {
