@@ -1,5 +1,6 @@
 allow-branch = ["main"]
-pre-release-commit-message = "Release"
+shared-version = true
+pre-release-commit-message = "Release version {{version}}."
 
 [[pre-release-replacements]]
 file = "CHANGELOG.md"
