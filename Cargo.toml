@@ -9,9 +9,13 @@ keywords = ["tui", "terminal", "ascii", "cp437", "gamedev"]
 repository = "https://github.com/theq629/ratatui-bracket-terminal"
 
 [dependencies]
-bracket-terminal = { version = "0.8" }
+bracket-terminal = { version = "=0.8" }
 ratatui = { version="0.29", default-features=false }
 object-pool = "0.5" # used by bracket-terminal, but we need the interface
 
 [dev-dependencies]
+bracket-terminal = { version = "=0.8.5" } # need to compile for web
 rand = { version = "0.9", default-features=false, features = ['small_rng'] }
+
+[target.wasm32-unknown-unknown.dependencies]
+wasm-bindgen-test = "0.3.55"

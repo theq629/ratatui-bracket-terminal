@@ -16,9 +16,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - uses: jetli/wasm-pack-action@v0.4.0
+      with:
+        version: 'latest'
     - name: Format
       run: cargo fmt --all --check
     - name: Build
       run: cargo build --verbose
-    - name: Run tests
+    - name: Run tests normally
       run: cargo test --verbose
+    - name: Run tests for web
+      run: wasm-pack test --node
