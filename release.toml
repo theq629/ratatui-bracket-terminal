@@ -1,0 +1,8 @@
+allow-branch = ["main"]
+pre-release-commit-message = "Release"
+
+[[pre-release-replacements]]
+file = "CHANGELOG.md"
+search = "\\[Unreleased\\] - ReleaseDate"
+replace  =  "[Unreleased] - ReleaseDate\n\n## [{{version}}] - {{date}}"
+exactly = 1
